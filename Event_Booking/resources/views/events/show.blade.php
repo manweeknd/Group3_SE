@@ -45,7 +45,11 @@
                     <p class="text-gray-700 leading-relaxed">{{ $event->description }}</p>
                 </div>
 
-                @if($event->availableTickets() > 0)
+                @if($event->date->isPast())
+                    <div class="bg-red-50 p-6 rounded-lg border border-red-200">
+                        <p class="text-red-600 font-semibold">Booking Closed</p>
+                    </div>
+                @elseif($event->availableTickets() > 0)
                     <div class="bg-gradient-to-r from-green-50 to-blue-50 p-6 rounded-lg border border-green-200">
                         <form action="{{ route('events.book', $event) }}" method="POST" class="flex flex-col md:flex-row items-end gap-4">
                             @csrf

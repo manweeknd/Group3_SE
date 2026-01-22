@@ -68,9 +68,15 @@
                                 </div>
                             </div>
 
-                            <a href="{{ route('events.show', $event) }}" class="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-3 px-4 rounded-lg shadow-lg transition transform hover:scale-105 text-center block">
-                                View Details & Book
-                            </a>
+                            @if($event->date->isPast())
+                                <span class="w-full bg-gray-400 text-white font-bold py-3 px-4 rounded-lg shadow-lg text-center block cursor-not-allowed">
+                                    Booking Closed
+                                </span>
+                            @else
+                                <a href="{{ route('events.show', $event) }}" class="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-3 px-4 rounded-lg shadow-lg transition transform hover:scale-105 text-center block">
+                                    View Details & Book
+                                </a>
+                            @endif
                         </div>
                     </div>
                 @endforeach

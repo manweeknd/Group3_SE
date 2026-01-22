@@ -55,6 +55,11 @@ class CustomerController extends Controller
     public function book(Request $request, Event $event)
     {
         // bookEvents (action)
+        // Check if event is in the past
+        if ($event->date->isPast()) {
+            return back()->with('error', 'Booking is closed for this event.');
+        }
+
         // Check availability
         if ($event->availableTickets() < 1) {
             return back()->with('error', 'Event is fully booked.');
